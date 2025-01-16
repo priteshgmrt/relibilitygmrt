@@ -1,7 +1,9 @@
+// vuuuuuuuuuuu
+
+
 import React, { useState, useEffect, useMemo } from "react";
 import Select from "react-select";
 import * as XLSX from "xlsx";
-
 const Dropdowns = ({ calculateReliability }) => {
   const [excelData, setExcelData] = useState([]);
   const [filteredRows, setFilteredRows] = useState([]);
@@ -49,7 +51,7 @@ const Dropdowns = ({ calculateReliability }) => {
       uniqueValues = [...new Set(data.map((row) => row[key]))];
       uniqueValues.sort(); // Sort alphabetically
     }
-    const allOption = { value: "all", label: "All" };
+    const allOption = { value: "all", label: "Select All" };
     return [
       allOption,
       ...uniqueValues.map((value) => ({ value, label: value })),
@@ -98,17 +100,33 @@ const Dropdowns = ({ calculateReliability }) => {
     }
 
     if (keyword.trim()) {
+      const keywords = keyword
+        .toLowerCase()
+        .split(",") // Split input into multiple keywords using a comma
+        .map((k) => k.trim()) // Trim whitespace around each keyword
+        .filter((k) => k); // Remove empty strings
+  
       filtered = filtered.filter((row) =>
-        Object.values(row).some(
-          (value) =>
-            value &&
-            String(value).toLowerCase().includes(keyword.toLowerCase())
+        keywords.some((kw) =>
+          Object.values(row).some(
+            (value) =>
+              value &&
+              String(value).toLowerCase().includes(kw) // Check if any keyword matches
+          )
         )
       );
     }
 
+    const numberOfYears = selectedYears.length > 0
+      ? selectedYears.some((option) => option.value === "all")
+        ? yearOptions.length - 1 // All years are selected
+        : selectedYears.length
+      : 0;
+
+    const totalDays = 8760 * numberOfYears; // Calculate total days based on selected years
+
+    calculateReliability(filtered, totalDays); // Call the passed function with filtered data and totalDays
     setFilteredRows(filtered);
-    calculateReliability(filtered); // Call the passed function
   };
 
   const handleSelectChange = (setterFunction, options) => {
@@ -129,6 +147,7 @@ const Dropdowns = ({ calculateReliability }) => {
             <div className="dropdown">
               <label>Year:</label>
               <Select
+               type="checkbox"
                 options={yearOptions}
                 isMulti
                 onChange={(selected) =>
@@ -140,6 +159,7 @@ const Dropdowns = ({ calculateReliability }) => {
             <div className="dropdown">
               <label>Antenna:</label>
               <Select
+               type="checkbox"
                 options={antennaOptions}
                 isMulti
                 onChange={(selected) =>
@@ -151,6 +171,7 @@ const Dropdowns = ({ calculateReliability }) => {
             <div className="dropdown">
               <label>System:</label>
               <Select
+               type="checkbox"
                 options={systemOptions}
                 isMulti
                 onChange={(selected) =>

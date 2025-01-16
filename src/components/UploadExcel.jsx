@@ -4,40 +4,41 @@ const UploadExcel = () => {
   const [file, setFile] = useState(null);
   const [message, setMessage] = useState("");
 
-  const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
   };
 
   const handleUpload = async () => {
     if (!file) {
-      setMessage("Please select a file.");
+      setMessage("Please select a file first.");
       return;
     }
 
     const formData = new FormData();
-    formData.append("file", file);
+    formData.append("excelFile", file);
 
     try {
-      const response = await fetch("http://localhost:5000/upload", {
+      const response = await fetch("http://localhost:3000/replace", {
         method: "POST",
         body: formData,
       });
 
+      const result = await response.json();
       if (response.ok) {
-        setMessage("File uploaded successfully!");
+        setMessage(result.message);
       } else {
-        setMessage("Error uploading file.");
+        setMessage(result.error);
       }
     } catch (error) {
-      console.error("Upload error:", error);
+      console.error("Error uploading file:", error);
       setMessage("Error uploading file.");
     }
   };
 
   return (
-    <div className="upload-page">
+    <div>
       <h2>Upload Excel File</h2>
-      <input type="file" accept=".xlsx, .xls" onChange={handleFileChange} />
+      <input type="file" onChange={handleFileChange} />
       <button onClick={handleUpload}>Upload</button>
       {message && <p>{message}</p>}
     </div>

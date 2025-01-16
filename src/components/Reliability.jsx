@@ -41,27 +41,26 @@ const Reliability = ({ metrics }) => {
               <strong>MTBF:</strong> {metrics.MTBF}
             </p>
             <p>
-              <strong>MTTF:</strong> {metrics.MTTF}
+              <strong>Failure Rate:</strong> {metrics.failureRate}
             </p>
           </div>
           <div className="r_2">
             <p>
-              <strong>MTTR:</strong>  5 hours
+              <strong>MTTR:</strong> {metrics.MTTR}
             </p>
-
             <p>
               <strong>Availability:</strong> {metrics.Availability}
+            </p>
+            <p>
+              <strong>Reliability:</strong> {metrics.Reliability}
             </p>
           </div>
           <div className="r_3">
             <p>
-              <strong>Failure Rate:</strong> {metrics.failureRate}
+              <strong>MTTF:</strong> {metrics.MTTF}
             </p>
-            <p>
+            <p style={{ backgroundColor: "#9ac2eb" }}>
               <strong>Downtime:</strong> {metrics.Downtime}
-            </p>
-            <p>
-              <strong>Reliability:</strong> {metrics.Reliability}
             </p>
           </div>
         </div>

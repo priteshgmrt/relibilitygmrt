@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Blocks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        p {
+            color: #555;
+        }
+
+        .mnb {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .mnb div {
+            height: 100px;
+            width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .first {
+            background-color: green;
+        }
+
+        .second {
+            background-color: blue;
+        }
+
+        .third {
+            background-color: yellow;
+            color: black;
+        }
+
+        @media screen and (max-width: 500px) {
+            .mnb div {
+                width: 70%;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Geeks for Geeks</h1>
+    <p>Responsive div using CSS.</p>
+    <div class="mnb">
+        <div class="first">
+            <p>First block</p>
+        </div>
+        <div class="second">
+            <p>Second block</p>
+        </div>
+        <div class="third">
+            <p>Third block</p>
+        </div>
+    </div>
+    <p>
+        The media query will only apply
+        if the media type is screen
+        and the viewport is equal to
+        or less than 500px
+    </p>
+</body>
+
+</html>

@@ -15,7 +15,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <Link to="/" className="navbar-logo">
+        <Link to="/reliabilitygmrt" className="navbar-logo">
           <img src={logo} alt="GMRT Logo" className="logo" />
         </Link>
         {/* Hamburger Menu Icon */}
@@ -25,7 +25,7 @@ const Navbar = () => {
         {/* Navigation Menu */}
         <ul className={`navbar-menu ${menuOpen ? "open" : ""}`}>
           <li className="navbar-item active">
-            <Link to="/" className="navbar-link">
+            <Link to="/reliabilitygmrt" className="navbar-link">
               Home
             </Link>
           </li>
